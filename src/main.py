@@ -1,4 +1,6 @@
 import gerenciador_arquivos
+import visualizador
+
 continua = True
 pessoas =[]
 
@@ -29,3 +31,24 @@ while continua:
     elif escolha_menu == "[SALVAR]":
         gerenciador_arquivos.salvar_pessoas("rsc/pessoas_pequeno.csv", pessoas)
         print("Pessoas salvas com sucesso!")
+    else:
+        print("Opção inválida! Tente digitar outra coisa.")
+        continue
+    print("MENU DE VISUALIZAÇÃO")
+    print("-" * 20)
+    print("[TABELA]")
+    print("[GRAFICO SALARIOS]")
+    print("[GRAFICO PATRIMONIOS]")
+    escolha_visualizacao = input("Digite como você quer visualizar os dados(entre []): ").upper()
+    if escolha_visualizacao == "[TABELA]":
+        visualizador.visualizar_tabela(pessoas)
+    elif escolha_visualizacao == "[GRAFICO SALARIOS]":
+        salarios = []
+        for pessoa in pessoas:
+            salarios.append(pessoa["salario"])
+        visualizador.visualizar_grafico(salarios, True, True, True, 1000, "34")
+    elif escolha_visualizacao == "[GRAFICO PATRIMONIOS]":
+        patrimonios = []
+        for pessoa in pessoas:
+            patrimonios.append(pessoa["patrimonio"])
+        visualizador.visualizar_grafico(patrimonios, True, True, True, 10000, "32")
