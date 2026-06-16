@@ -1,14 +1,24 @@
 import csv
+import os
+
+
+def limpar_tela():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 
 def carregar_pessoas(caminho_arquivo):
     pessoas = []
     with open(caminho_arquivo, mode='r', encoding='utf-8') as file:
         reader = csv.reader(file)
         for linha in reader:
+            if not linha:
+                continue
+            if "nome" in linha[0].lower():
+                continue
             pessoa = {
                 "nome": linha[0].strip(),
-                "patrimonio": float(linha[1].strip()),
-                "salario": float(linha[2].strip())
+                "patrimonio": linha[1].strip(),
+                "salario": linha[2].strip()
             }
             pessoas.append(pessoa)
         return pessoas
@@ -28,7 +38,8 @@ def remover_pessoas(nome, lista):
     for pessoa in lista:
         if pessoa["nome"].lower() == nome_desejado:
             lista.remove(pessoa)
-
+            return True
+    return False
 
 def salvar_pessoas(caminho_arquivo, lista):
     with open(caminho_arquivo, mode='w', encoding='utf-8', newline='') as file:
