@@ -65,25 +65,25 @@ while continua:
         salarios = []
         for pessoa in pessoas:
             salarios.append(float(pessoa["salario"]))
-            if salarios:
-                maior_salario = max(salarios)
-                if maior_salario > 0:
-                    escala = maior_salario / 10
-                else:
-                    escala = 1000
-        visualizador.visualizar_grafico(salarios, True, True, True, escala, "34")
+        if salarios:
+            maior_salario = max(salarios)
+            if maior_salario > 0:
+                escala = maior_salario / 10
+            else:
+                escala = 1000
+            visualizador.visualizar_grafico(salarios, True, True, True, escala, "34")
     elif escolha_visualizacao in ["3", "GRAFICO PATRIMONIOS"]:
         gerenciador_arquivos.limpar_tela()
         patrimonios = []
         for pessoa in pessoas:
             patrimonios.append(float(pessoa["patrimonio"]))
-            if patrimonios:
-                maior_patrimonio = max(patrimonios)
-                if maior_patrimonio > 0:
-                    escala = maior_patrimonio / 10
-                else:
-                    escala = 1000
-        visualizador.visualizar_grafico(patrimonios, True, True, True, escala, "32")
+        if patrimonios:
+            maior_patrimonio = max(patrimonios)
+            if maior_patrimonio > 0:
+                escala = maior_patrimonio / 10
+            else:
+                escala = 1000
+            visualizador.visualizar_grafico(patrimonios, True, True, True, escala, "32")
     elif escolha_visualizacao in ["4", "SAIR"]:
         break
     else:
