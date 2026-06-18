@@ -21,7 +21,7 @@ def carregar_pessoas(caminho_arquivo):
                 "salario": linha[2].strip()
             }
             pessoas.append(pessoa)
-        return pessoas
+    return pessoas
 
 
 def adicionar_pessoas(nome, patrimonio, salario, lista):
