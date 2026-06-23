@@ -1,5 +1,7 @@
 import gerenciador_arquivos
 import visualizador
+import ordenacao
+import agrupamento
 
 continua = True
 pessoas = []
@@ -53,7 +55,8 @@ while continua:
     print("1 [TABELA]")
     print("2 [GRAFICO SALARIOS]")
     print("3 [GRAFICO PATRIMONIOS]")
-    print("4 [SAIR]")
+    print("4 [GRAFICO DE MEDIAS]")
+    print("5 [SAIR]")
     
     escolha_visualizacao = input("Digite como você quer visualizar os dados: ").upper().strip()
     
@@ -84,7 +87,34 @@ while continua:
             else:
                 escala = 1000
             visualizador.visualizar_grafico(patrimonios, True, True, True, escala, "32")
-    elif escolha_visualizacao in ["4", "SAIR"]:
+    elif escolha_visualizacao in ["4", "GRAFICO DE MEDIAS"]:
+        gerenciador_arquivos.limpar_tela()
+        qtd = int(input("Deseja dividir em quantos grupos? "))
+        while True:
+            informacao = input("Você quer ver o gráfico de patrimonio ou de salarios? ")
+            if informacao == "patrimonio":
+                medias = agrupamento.agrupamento(pessoas, qtd)
+                gerenciador_arquivos.limpar_tela()
+                print("\n--- Gráfico de médias por patrimônio ---")
+                visualizador.visualizar_grafico(medias, True, True, True, 1000, "32")
+                break
+            elif informacao == "salario":
+                medias = agrupamento.agrupamento(pessoas, qtd)
+                gerenciador_arquivos.limpar_tela()
+                print("\n--- Gráfico de médias por salário ---")
+                visualizador.visualizar_grafico(medias, True, True, True, 1000, "32")
+                break
+            else:
+                print("\033[31mOpção inválida! Digite 'patrimonio' ou 'salario'.\033[m")
+                continue
+        patrimonios = []
+        for pessoa in pessoas:
+            patrimonios.append(float(pessoa["patrimonio"]))
+        ordenacao.ordenacao_patrimonio(patrimonios)
+        agrupamento.agrupamento(patrimonios, 5)
+        visualizador.visualizar_grafico(agrupamento.lista_agrupamentos, True, True, True, None, "32")
+
+    elif escolha_visualizacao in ["5", "SAIR"]:
         break
     else:
         print("\033[31mOpção de visualização inválida! Voltando ao menu principal.\033[0m")

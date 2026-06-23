@@ -45,7 +45,7 @@ def visualizar_grafico(valores, direcao_cima, linha_horizontal, rotulo_eixo_vert
         linha = ""
         if rotulo_eixo_vertical:
             texto_eixo = f"R${nivel:.2f}"
-            linha += f"R${texto_eixo:>14} | "
+            linha += f"R${texto_eixo:>16} | "
         for valor in valores:
             if valor >= nivel:
                 linha += f"\033[{cor}m █ \033[0m"  
