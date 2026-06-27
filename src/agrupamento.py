@@ -16,7 +16,7 @@ def agrupamento(lista, qtd_grupos, chave='patrimonio'):
     elif chave == 'salario':
         lista = ordenacao.ordenacao_salario(lista)
     else:
-        chave == 'patrimonio'
+        chave = 'patrimonio'
     for elemento in lista:
         grupo.append(float(elemento[chave]))
         if len(grupo) == qtd_elementos_grupo:
