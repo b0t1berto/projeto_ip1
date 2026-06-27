@@ -91,7 +91,7 @@ while continua:
         gerenciador_arquivos.limpar_tela()
         qtd = int(input("Deseja dividir em quantos grupos? "))
         while True:
-            informacao = input("Você quer ver o gráfico de patrimonio ou de salarios? ")
+            informacao = input("Você quer ver o gráfico de patrimonio ou de salarios? ").strip().lower()
             if informacao == "patrimonio":
                 medias = agrupamento.agrupamento(pessoas, qtd)
                 gerenciador_arquivos.limpar_tela()
@@ -107,13 +107,6 @@ while continua:
             else:
                 print("\033[31mOpção inválida! Digite 'patrimonio' ou 'salario'.\033[m")
                 continue
-        patrimonios = []
-        for pessoa in pessoas:
-            patrimonios.append(float(pessoa["patrimonio"]))
-        ordenacao.ordenacao_patrimonio(patrimonios)
-        agrupamento.agrupamento(patrimonios, 5)
-        visualizador.visualizar_grafico(agrupamento.lista_agrupamentos, True, True, True, None, "32")
-
     elif escolha_visualizacao in ["5", "SAIR"]:
         break
     else:
