@@ -9,19 +9,16 @@ st.title("Gerenciador de Pessoas")
 if "pessoas" not in st.session_state:
     st.session_state.pessoas = []
 
-escolha_menu = st.selectbox(
-    "Menu",
-    ["CARREGAR", "ADICIONAR", "REMOVER", "SALVAR"],
-    key="menu_principal"
-)
+escolha_menu = gerenciador_arquivos.menu_principal()
+
 if escolha_menu == "CARREGAR":
     st.session_state.pessoas = gerenciador_arquivos.carregar_pessoas("rsc/pessoas_pequeno.csv")
     st.success("Pessoas carregadas com sucesso!")
 elif escolha_menu == "ADICIONAR":
     with st.form("form_adicionar"):
         nome = st.text_input("Digite o nome da pessoa que você quer adicionar: ")
-        patrimonio = st.number_input("Digite o patrimônio da pessoa: ", min_value=0)
-        salario = st.number_input("Digite o salário da pessoa: ", min_value=0)
+        patrimonio = st.number_input("Digite o patrimônio da pessoa: ", min_value=0, step=100)
+        salario = st.number_input("Digite o salário da pessoa: ", min_value=0, step=100)
         botao_add = st.form_submit_button("Adicionar pessoa")
 
         if botao_add:
