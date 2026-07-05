@@ -1,17 +1,21 @@
 import streamlit as st
+import pandas as pd
 
 def visualizar_tabela(pessoas):
-    conteudo_tabela = f"| {'nome':<18} | {'patrimonio':>15} | {'salario':>14}"
-    conteudo_tabela += f"|{'-'*20}|{'-'*17}|{'-'*15}"
+    dados = []
 
     for pessoa in pessoas:
         patrimonio_num = float(pessoa['patrimonio'])
         salario_num = float(pessoa['salario'])
-        texto_patrimonio = f"R$ {patrimonio_num:.2f}"
-        texto_salario = f"R$ {salario_num:.2f}"
-        conteudo_tabela += f"| {pessoa['nome']:<18} | {texto_patrimonio:>15} | {texto_salario:>14}"
 
-    st.code(conteudo_tabela, language="text")
+        dados.append({
+            "Nome": pessoa["nome"],
+            "Patrimônio": f"R$ {patrimonio_num:.2f}",
+            "Salário": f"R$ {salario_num:.2f}"
+        })
+
+    df = pd.DataFrame(dados)
+    st.dataframe(df, use_container_width=True)
 
 
 def visualizar_grafico(valores, direcao_cima, linha_horizontal, rotulo_eixo_vertical, escala_valor, cor, multiplicador_log = 0):
@@ -19,7 +23,7 @@ def visualizar_grafico(valores, direcao_cima, linha_horizontal, rotulo_eixo_vert
         st.write("Sem valores para gerar o gráfico.")
         return
     multiplicador_log = st.number_input(
-        "Qual multiplicador você usará na escala?(0 pra pular) ",
+        "Qual multiplicador você usará na escala? ",
         min_value=0,
         key=f"multiplicador_{escala_valor}_{cor}"
         )

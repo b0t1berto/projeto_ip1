@@ -1,4 +1,13 @@
 import csv
+import streamlit as st
+
+
+def menu_principal():
+    return st.sidebar.selectbox(
+        "Menu",
+        ["CARREGAR", "ADICIONAR", "REMOVER", "SALVAR"],
+        key="menu_principal"
+    )
 
 
 def carregar_pessoas(caminho_arquivo):
